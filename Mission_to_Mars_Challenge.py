@@ -1,3 +1,5 @@
+
+# Import Splinter and BeautifulSoup
 from splinter import Browser
 from bs4 import BeautifulSoup as soup
 from webdriver_manager.chrome import ChromeDriverManager
@@ -11,14 +13,14 @@ browser = Browser('chrome', **executable_path, headless=False)
 # Visit the mars nasa news site
 url = 'https://redplanetscience.com'
 browser.visit(url)
-
-browser.is_element_present_by_css('div.list_text', wait_time=1)
+# Optional delay for loading the page
 
 html = browser.html
 news_soup = soup(html, 'html.parser')
 slide_elem = news_soup.select_one('div.list_text')
 
 slide_elem.find('div', class_='content_title')
+
 
 # Use the parent element to find the first `a` tag and save it as `news_title`
 news_title = slide_elem.find('div', class_='content_title').get_text()
@@ -28,6 +30,7 @@ news_title
 news_p = slide_elem.find('div', class_='article_teaser_body').get_text()
 news_p
 
+# ## Featured Images
 
 # Visit URL
 url = 'https://spaceimages-mars.com'
@@ -64,6 +67,9 @@ executable_path = {'executable_path': ChromeDriverManager().install()}
 browser = Browser('chrome', **executable_path, headless=False)
 
 # # D1: Scrape High-Resolution Mars’ Hemisphere Images and Titles
+
+# ### Hemispheres
+
 # 1. Use browser to visit the URL
 url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
 
@@ -72,11 +78,6 @@ browser.visit(url)
 # 2. Create a list to hold the images and titles.
 hemisphere_image_urls = []
 main_url = 'https://astrogeology.usgs.gov'
-
-## 2. Create a list to hold the images and titles.
-hemisphere_image_urls = []
-main_url = 'https://astrogeology.usgs.gov'
-
 
 # 3. Write code to retrieve the image urls and titles for each hemisphere.
 html = browser.html
@@ -103,8 +104,6 @@ for partial_url in partial_urls:
         'title': title,
     }
     hemisphere_image_urls.append(hemispheres)
-
-
 
 
 # 4. Print the list that holds the dictionary of each image url and title.
