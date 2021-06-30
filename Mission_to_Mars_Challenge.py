@@ -75,35 +75,45 @@ url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=tar
 
 browser.visit(url)
 
-# 2. Create a list to hold the images and titles.
-hemisphere_image_urls = []
+# Parse the data
+hemisphere_html = browser.html
+hemisphere_soup = soup(hemisphere_html, 'html.parser')
+
+# Retrieve all items for hemispheres information
+items = hemisphere_soup.find_all('div', class_='item')
+
 main_url = 'https://astrogeology.usgs.gov'
 
+
+# 2. Create a list to hold the images and titles.
+hemisphere_image_urls = []
+
 # 3. Write code to retrieve the image urls and titles for each hemisphere.
-html = browser.html
-html_soup = soup(html, 'html.parser')
-image_finder = html_soup.find("div", class_='collapsible results')
-images = image_finder.find_all('a')
-partial_urls = set([image['href'] for image in images])
+main_url = "https://astrogeology.usgs.gov/"
+# Create loop to scrape through all hemisphere information
+for item in items:
+#     hemisphere = {}
+    titles = item.find('h3').text
+    # create link for full image
+    link = item.find('a', class_='itemLink product-item')['href']
+    # Use the base URL to create an absolute URL and browser visit
+    browser.visit(f'{main_url}{link}')
+    # parse the data
+    image_html = browser.html
+    image_soup = soup(image_html, 'html.parser')
+    download = image_soup.find('div', class_= 'downloads')
+    img_url = download.find('a')['href']
 
-for partial_url in partial_urls:
-    hemispheres = {}
-    full_url = f'{main_url}{partial_url}'
-    browser.visit(full_url)
-    browser.links.find_by_text('Open').click()
+    print(titles)
+    print(img_url)
 
-    html = browser.html
-    url_soup = soup(html, 'html.parser')
-    download_div = url_soup.find('div', class_ = 'collapsible results')
-    img_anchor = url_soup.find_all('a')
-    title_elem = url_soup.select_one('div.content')
-    title = title_elem.find("h2", class_='title').get_text()
-
+    # append list
     hemispheres = {
-        'img_url': img_url,
-        'title': title,
-    }
+            'img_url': img_url,
+            'title': titles,
+        }
     hemisphere_image_urls.append(hemispheres)
+    browser.back()
 
 
 # 4. Print the list that holds the dictionary of each image url and title.
