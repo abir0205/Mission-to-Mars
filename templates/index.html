@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Mission to Mars</title>
 
-    <link
-        rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body style="color:black">
     <div class="container">
         <div style="background:linear-gradient(to bottom, #ffcccc 15%, #e9967a 85%)!important" class="jumbotron text-center">
             <h1>Mission to Mars</h1>
             <!--Add a button to activate scraping script-->
-            <p><a class="btn btn-default btn-lg" href="/scrape"
-                role="button"><b>Scrape New Data</b></a></p>
+            <p><a class="btn btn-default btn-lg" href="/scrape" role="button"><b>Scrape New Data</b></a></p>
         </div>
         <!--Add section for Mars News-->
         <div class="row" id="mars-news">
@@ -25,8 +19,8 @@
             <div class="media">
                 <div class="media-body">
                     <h2>Latest Mars News</h2>
-                    <h4>{{mars.news_title}}</h4>
-                    <p>{{mars.news_paragraph}}</p>
+                    <h4>The Detective Aboard NASA's Perseverance Rover</h4>
+                    <p>An instrument called SHERLOC will, with the help of its partner WATSON, hunt for signs of ancient life by detecting organic molecules and minerals.</p>
                 </div>
             </div>
             </div>
@@ -37,17 +31,63 @@
             <!--Second Level-->
             <div class="col-md-8">
                 <h2>Feature Mars Image</h2>
-                <img
-                src="{{mars.featured_image}}"
-                class="img-responsive"
-                alt="Responsive image"
-                />
+                <img src="https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/image/featured/mars2.jpg" class="img-responsive" alt="Responsive image">
             </div>
             <div class="col-md-4">
                 <!--Mars Facts-->
                 <div class="row" id="mars-facts">
                     <h3>Mars Facts</h3>
-                    {{mars.facts|safe}}
+                    <table border="1" class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mars</th>
+      <th>Earth</th>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Mars - Earth Comparison</th>
+      <td>Mars</td>
+      <td>Earth</td>
+    </tr>
+    <tr>
+      <th>Diameter:</th>
+      <td>6,779 km</td>
+      <td>12,742 km</td>
+    </tr>
+    <tr>
+      <th>Mass:</th>
+      <td>6.39 × 10^23 kg</td>
+      <td>5.97 × 10^24 kg</td>
+    </tr>
+    <tr>
+      <th>Moons:</th>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Distance from Sun:</th>
+      <td>227,943,824 km</td>
+      <td>149,598,262 km</td>
+    </tr>
+    <tr>
+      <th>Length of Year:</th>
+      <td>687 Earth days</td>
+      <td>365.24 days</td>
+    </tr>
+    <tr>
+      <th>Temperature:</th>
+      <td>-87 to -5 °C</td>
+      <td>-88 to 58°C</td>
+    </tr>
+  </tbody>
+</table>
                 </div>
             </div>
         </div>
@@ -55,16 +95,33 @@
         <div class="row" id="mars-hemisphere">
             <div class="col-md-12">
                 <h2><center>Mars Hemispheres</center></h2>
-                {% for hemisphere in mars.hemispheres %}
+
                     <div class="col-md-3">
-                        <div class = "thumbnail">
-                            <img src="{{hemisphere.img_url}}"
-                              <h2><b>{{hemisphere.title}}</b></h2>
+                        <div class="thumbnail">
+                            <img src="https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/cerberus_enhanced.tif/full.jpg" <h2=""><b>Cerberus Hemisphere Enhanced</b>
                         </div>
                     </div>
-                {% endfor %}
+
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img src="https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/schiaparelli_enhanced.tif/full.jpg" <h2=""><b>Schiaparelli Hemisphere Enhanced</b>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img src="https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/syrtis_major_enhanced.tif/full.jpg" <h2=""><b>Syrtis Major Hemisphere Enhanced</b>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img src="https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/valles_marineris_enhanced.tif/full.jpg" <h2=""><b>Valles Marineris Hemisphere Enhanced</b>
+                        </div>
+                    </div>
+
             </div>
         </div>
     </div>
-</body>
-</html>
+
+</body></html>
